@@ -1,6 +1,5 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { SearchService } from './search.service';
-import { Response } from 'express';
 
 @Controller('search')
 export class SearchController {

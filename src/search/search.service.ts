@@ -1,5 +1,5 @@
-import { HttpException, Injectable, Post } from '@nestjs/common';
-import axios, { all } from 'axios';
+import { HttpException, Injectable } from '@nestjs/common';
+import axios from 'axios';
 import { Datum, F, SearchResponse, Sn } from './interfaces/SearchResponse';
 import { returnWinnerOrDraw } from './utils/returnWinnerOrDraw';
 
