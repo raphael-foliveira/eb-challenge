@@ -1,5 +1,8 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common';
 import { SearchService } from './search.service';
+import { SearchBodyDTO } from './dto/searchBody.dto';
+import { SearchResult } from './types/SearchResult';
+import { ApiResponse } from '@nestjs/swagger';
 
 @Controller('search')
 export class SearchController {
@@ -7,7 +10,8 @@ export class SearchController {
 
   @Post()
   @HttpCode(200)
-  async search(@Body() { teamName = 'Cruzeiro' }: { teamName: string }) {
+  @ApiResponse({ status: 200, type: SearchResult })
+  async search(@Body() { teamName = 'Cruzeiro' }: SearchBodyDTO) {
     return this.robot.findNextGameOdds(teamName);
   }
 }
