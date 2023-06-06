@@ -23,3 +23,6 @@ POST:
 ```
 
 Busca pelo próximo jogo do time especificado, retornando data e horário do evento, time adversário e odds (vitória, empate e derrota)
+
+
+Documentação no formato OpenAPI disponível no endpoint `/docs`
