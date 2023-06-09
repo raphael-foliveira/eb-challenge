@@ -1,15 +1,8 @@
-import {
-  BadRequestException,
-  Controller,
-  Get,
-  HttpCode,
-  Post,
-  Query,
-} from '@nestjs/common';
-import { SearchService } from './search.service';
-import { SearchQueryDTO } from './dto/searchBody.dto';
-import { SearchResult } from './types/SearchResult';
+import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { ApiQuery, ApiResponse } from '@nestjs/swagger';
+import { SearchQueryDTO } from './dto/searchBody.dto';
+import { SearchService } from './search.service';
+import { SearchResult } from './types/SearchResult';
 
 @Controller('search')
 export class SearchController {

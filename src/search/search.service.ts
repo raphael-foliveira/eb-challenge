@@ -6,6 +6,7 @@ import {
 import axios from 'axios';
 import { Datum, F, SearchResponse, Sn } from './types/SearchResponse';
 import { returnWinnerOrDraw } from './utils/returnWinnerOrDraw';
+import * as moment from 'moment';
 
 @Injectable()
 export class SearchService {
@@ -24,7 +25,10 @@ export class SearchService {
       result: returnWinnerOrDraw(currOdd.hSh),
       odd: currOdd.hO,
     }));
-    const date = new Date(nextGameInfo.fsd).toString();
+    const date =
+      moment(nextGameInfo.fsd)
+        .locale('america/sao-paulo')
+        .format('MMMM Do YYYY, HH:mm') + ' (GMT -3)';
     return {
       homeTeam: nextGameInfo.hcN,
       awayTeam: nextGameInfo.acN,
