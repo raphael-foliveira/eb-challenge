@@ -1,17 +1,29 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  HttpCode,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { SearchService } from './search.service';
-import { SearchBodyDTO } from './dto/searchBody.dto';
+import { SearchQueryDTO } from './dto/searchBody.dto';
 import { SearchResult } from './types/SearchResult';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse } from '@nestjs/swagger';
 
 @Controller('search')
 export class SearchController {
   constructor(private robot: SearchService) {}
 
-  @Post()
-  @HttpCode(200)
+  @Get()
+  @ApiQuery({ name: 'teamName', required: false })
   @ApiResponse({ status: 200, type: SearchResult })
-  async search(@Body() { teamName = 'Cruzeiro' }: SearchBodyDTO) {
+  async search(@Query() { teamName = 'Cruzeiro' }: SearchQueryDTO) {
+    if (!teamName) {
+      throw new BadRequestException(
+        'teamName cannot be empty when passed as a query parameter.',
+      );
+    }
     return this.robot.findNextGameOdds(teamName);
   }
 }

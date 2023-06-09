@@ -1,4 +1,8 @@
-import { HttpException, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import axios from 'axios';
 import { Datum, F, SearchResponse, Sn } from './types/SearchResponse';
 import { returnWinnerOrDraw } from './utils/returnWinnerOrDraw';
@@ -65,7 +69,7 @@ export class SearchService {
       },
     );
     if (!response.data.success) {
-      throw new HttpException('No games were found', 404);
+      throw new InternalServerErrorException('Search failed');
     }
 
     const searchResponse: SearchResponse = response.data;

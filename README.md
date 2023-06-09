@@ -14,15 +14,14 @@ Endpoint:
 /search
 ```
 
-POST:
+GET:
 
-```json
-{
-	"teamName": "Cruzeiro"
-}
-```
+    Query:
 
-Busca pelo próximo jogo do time especificado, retornando data e horário do evento, time adversário e odds (vitória, empate e derrota)
+    `teamName (string)` - Nome do time a ser buscado
 
+Busca pelo próximo jogo do time especificado, retornando data e horário do evento, time adversário e odds (vitória, empate e derrota).
+
+Busca por cruzeiro quando o Parâmetro não é especificado
 
 Documentação no formato OpenAPI disponível no endpoint `/docs`

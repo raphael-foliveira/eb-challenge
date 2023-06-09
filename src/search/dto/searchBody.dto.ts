@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class SearchBodyDTO {
+export class SearchQueryDTO {
   @ApiProperty()
-  teamName: string;
+  teamName: string | undefined;
 }
