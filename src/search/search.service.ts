@@ -28,6 +28,7 @@ export class SearchService {
     const date =
       moment(nextGameInfo.fsd)
         .locale('america/sao-paulo')
+        .utcOffset('-03:00')
         .format('MMMM Do YYYY, HH:mm') + ' (GMT -3)';
     return {
       homeTeam: nextGameInfo.hcN,
