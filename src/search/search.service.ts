@@ -7,6 +7,7 @@ import axios from 'axios';
 import { Datum, F, SearchResponse, Sn } from './types/SearchResponse';
 import { returnWinnerOrDraw } from './utils/returnWinnerOrDraw';
 import * as moment from 'moment';
+import { SearchResult } from './types/SearchResult';
 
 @Injectable()
 export class SearchService {
@@ -16,7 +17,7 @@ export class SearchService {
   /**
    * Executes the search for the next game's winner odds
    */
-  async findNextGameOdds(teamName: string) {
+  async findNextGameOdds(teamName: string): Promise<SearchResult> {
     const nextGameInfo = await this.getTeamsNextGameInfo(teamName);
     const nextGameOdds = nextGameInfo.btgs.find(
       (bet) => bet.btgN === 'Resultado',
@@ -78,7 +79,6 @@ export class SearchService {
     }
 
     const searchResponse: SearchResponse = response.data;
-    // filter only soccer results
     const soccerResults: Datum[] = searchResponse.data.filter(
       (d) => d.stSURL === 'soccer',
     );
@@ -88,7 +88,6 @@ export class SearchService {
       throw new HttpException('No future games were found', 404);
     }
 
-    // get the game that is closest to the current date
     return games.reduce((previous, current) =>
       current.fsd < previous.fsd ? current : previous,
     );
@@ -96,14 +95,9 @@ export class SearchService {
 
   private findGamesFromSeasons(seasons: Sn[]) {
     const games: F[] = [];
-
-    // iterate over each available season
     seasons.forEach((season) => {
-      // iterate over each of the current season's events
       return season.fs.forEach((event) => {
-        // check if current event is in the future and has both home and away teams
         if (new Date(event.fsd) > new Date() && event.acN && event.hcN) {
-          // add game to games array
           return games.push(event);
         }
       });

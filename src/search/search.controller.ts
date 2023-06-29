@@ -6,7 +6,7 @@ import { SearchResult } from './types/SearchResult';
 
 @Controller('search')
 export class SearchController {
-  constructor(private robot: SearchService) {}
+  constructor(private service: SearchService) {}
 
   @Get()
   @ApiQuery({ name: 'teamName', required: false })
@@ -17,6 +17,6 @@ export class SearchController {
         'teamName cannot be empty when passed as a query parameter.',
       );
     }
-    return this.robot.findNextGameOdds(teamName);
+    return this.service.findNextGameOdds(teamName);
   }
 }
