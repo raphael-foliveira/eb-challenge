@@ -1,6 +1,6 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common';
 import { ApiQuery, ApiResponse } from '@nestjs/swagger';
-import { SearchQueryDTO } from './dto/searchBody.dto';
+import { SearchQueryDTO } from './dto/SearchQueryDTO';
 import { SearchService } from './search.service';
 import { SearchResult } from './types/SearchResult';
 
