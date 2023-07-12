@@ -22,6 +22,10 @@ describe('search end to end', () => {
     await app.init();
   });
 
+  afterAll(async () => {
+    await app.close();
+  });
+
   it('/GET search', () => {
     return request(app.getHttpServer()).get('/search').expect(200);
   });

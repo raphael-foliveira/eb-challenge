@@ -13,13 +13,9 @@ describe('search controller', () => {
   describe('search', () => {
     it("should return the next cruzeiro's game odds", async () => {
       const result = { test: 'mocked' } as unknown as Promise<any>;
-      jest
-        .spyOn(searchService, 'findNextGameOdds')
-        .mockImplementation(() => result);
+      jest.spyOn(searchService, 'findNextGameOdds').mockResolvedValue(result);
 
-      expect(await searchController.search({ teamName: 'Cruzeiro' })).toBe(
-        result,
-      );
+      expect(await searchController.search({ teamName: 'Bahia' })).toBe(result);
     });
   });
 });
